@@ -48,7 +48,7 @@ public class BiomeSpeciesSelector implements IBiomeSpeciesSelector {
 			
 			fastTreeLookup.put(biomeId, select); // Cache decision for future use
 		} else {
-			select = new RandomDecision(rand).addUnhandled(220);
+			select = new RandomDecision(rand).addUnhandled(360);
 			boolean flag = false;
 			
 			int bi = Biome.getIdForBiome(biome);
@@ -56,7 +56,7 @@ public class BiomeSpeciesSelector implements IBiomeSpeciesSelector {
 			float greatwoodChance = BiomeHandler.getBiomeSupportsGreatwood(bi);
 			
 			if (greatwoodChance > 0) {
-				((RandomDecision) select).addSpecies(greatwood, (int) (3 * ((greatwoodChance * 0.4f) + 0.6f)));
+				((RandomDecision) select).addSpecies(greatwood, 3);
 				flag = true;
 			}
 			

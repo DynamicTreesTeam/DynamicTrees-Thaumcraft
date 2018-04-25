@@ -18,7 +18,7 @@ public class BiomeDensityProvider implements IBiomeDensityProvider {
 		if (biome == BiomeHandler.MAGICAL_FOREST) {
 			if (radius >= 3) { // Start dropping tree spawn opportunities when the radius gets bigger than 3
 				float chance = 2.0f / (radius);
-				return rand.nextFloat() < (Math.sqrt(chance) * 1.33f) ? EnumChance.OK : EnumChance.CANCEL;
+				return rand.nextFloat() < ((Math.sqrt(chance) * 1.125f) + 0.25f) ? EnumChance.OK : EnumChance.CANCEL;
 			}
 			return EnumChance.CANCEL;
 		}
