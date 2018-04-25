@@ -1,0 +1,16 @@
+[
+	{
+		"modid": "dynamictreestc",
+		"name": "Dynamic Trees TC",
+		"description": "Adding Dynamic Trees compatability for Thaumcraft 6",
+		"version": "${version}",
+		"mcversion": "${mcversion}",
+		"url": "",
+		"updateUrl": "",
+		"authorList": ["mangoose"],
+		"credits": "ferreusveritas",
+		"logoFile": "",
+		"screenshots": [],
+		"dependencies": []
+	}
+]

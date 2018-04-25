@@ -1,0 +1,7 @@
+{
+    "parent": "dynamictrees:item/branch",
+    "textures": {
+        "bark": "thaumcraft:blocks/log_greatwood",
+        "rings": "thaumcraft:blocks/log_greatwood_top"
+    }
+}

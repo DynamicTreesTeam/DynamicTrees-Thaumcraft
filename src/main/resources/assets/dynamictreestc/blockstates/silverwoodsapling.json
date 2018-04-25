@@ -1,0 +1,15 @@
+{
+	"forge_marker": 1,
+	"defaults": {
+		"model": "dynamictrees:sapling",
+		"textures": {
+			"log": "thaumcraft:blocks/log_silverwood",
+			"leaves": "thaumcraft:blocks/leaves_silverwood"
+		}
+	},
+	"variants": {
+		"normal": [{
+
+		}]
+	}
+}

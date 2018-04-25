@@ -1,0 +1,8 @@
+item.greatwoodseed.name=Greatwood Seed
+item.silverwoodseed.name=Silverwood Seed
+
+tile.leaves0.name=Dynamic Leaves
+tile.leaves_silverwood.name=Dynamic Leaves
+
+tile.dynamictreestc:greatwoodbranch.name=Dynamic Greatwood Tree
+tile.dynamictreestc:silverwoodbranch.name=Dynamic Silverwood Tree
