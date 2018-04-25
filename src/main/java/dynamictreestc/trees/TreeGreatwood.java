@@ -80,7 +80,7 @@ public class TreeGreatwood extends TreeFamily {
 				
 				@Override
 				public List<ItemStack> getLeavesDrop(IBlockAccess access, Species species, BlockPos breakPos, Random random, List<ItemStack> dropList, int fortune) {
-					int chance = 132;
+					int chance = 176;
 					if (fortune > 0) {
 						chance -= 2 << fortune;
 						if (chance < 10) { 
