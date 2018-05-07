@@ -10,6 +10,7 @@ import com.ferreusveritas.dynamictrees.items.Seed;
 import com.ferreusveritas.dynamictrees.systems.GrowSignal;
 import com.ferreusveritas.dynamictrees.systems.dropcreators.DropCreatorSeed;
 import com.ferreusveritas.dynamictrees.trees.TreeFamily;
+import com.ferreusveritas.dynamictrees.util.SafeChunkBounds;
 import com.ferreusveritas.dynamictrees.trees.Species;
 
 import dynamictreestc.DynamicTreesTC;
@@ -48,7 +49,7 @@ public class TreeGreatwood extends TreeFamily {
 		SpeciesGreatwood(TreeFamily treeFamily) {
 			super(treeFamily.getName(), treeFamily, ModContent.greatwoodLeavesProperties);
 			
-			setBasicGrowingParameters(0.25f, 22.0f, 8, 7, 1.25f); // TODO
+			setBasicGrowingParameters(0.25f, 22.0f, 8, 7, 1.25f);
 			setSoilLongevity(14); // Grows for a long long time
 			
 			setDynamicSapling(new BlockDynamicSapling("greatwoodsapling").getDefaultState());
@@ -129,18 +130,17 @@ public class TreeGreatwood extends TreeFamily {
 				}
 				return true;
 			}
-			
 			return false;
 		}
 		
 		@Override
-		public void postGeneration(World world, BlockPos rootPos, Biome biome, int radius, List<BlockPos> endPoints, boolean worldGen) {
-			super.postGeneration(world, rootPos, biome, radius, endPoints, worldGen);
+		public void postGeneration(World world, BlockPos rootPos, Biome biome, int radius, List<BlockPos> endPoints, boolean worldGen, SafeChunkBounds safeBounds) {
+			super.postGeneration(world, rootPos, biome, radius, endPoints, worldGen, safeBounds);
 			
 			// Add spiders to some greatwoods
 			int spiderChance = biome == BiomeHandler.MAGICAL_FOREST ? 21 : 8; // Lower chance in Magical Forests due to higher tree density
 			if (worldGen && world.rand.nextInt(spiderChance) == 0) {
-				addSpiders(world, rootPos, endPoints);
+				addSpiders(world, rootPos, endPoints, safeBounds);
 			}
 			
 			// Supplement Thaumcraft's vishroom generation
@@ -149,9 +149,9 @@ public class TreeGreatwood extends TreeFamily {
 			}
 		}
 		
-		public void addSpiders(World world, BlockPos rootPos, List<BlockPos> endPoints) {
+		public void addSpiders(World world, BlockPos rootPos, List<BlockPos> endPoints, SafeChunkBounds safeBounds) {
 			int webQuantity = (int) (endPoints.size() * ((world.rand.nextFloat() * 0.5f) + 0.75f));
-			webGen.setQuantity(webQuantity).gen(world, rootPos, endPoints);
+			webGen.setQuantity(webQuantity).gen(world, rootPos, endPoints, safeBounds);
 			
 			BlockPos spawnerPos = rootPos.down();
 			world.setBlockState(spawnerPos, Blocks.MOB_SPAWNER.getDefaultState());
@@ -193,9 +193,7 @@ public class TreeGreatwood extends TreeFamily {
 		
 		ModContent.greatwoodLeavesProperties.setTree(this);
 		
-		this.addConnectableVanillaLeaves((state) -> {
-			return state.getBlock() == BlocksTC.leafGreatwood;
-		});
+		addConnectableVanillaLeaves((state) -> state.getBlock() == BlocksTC.leafGreatwood);
 	}
 	
 	@Override

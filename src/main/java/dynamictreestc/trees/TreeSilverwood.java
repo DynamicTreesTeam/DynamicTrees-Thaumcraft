@@ -11,6 +11,7 @@ import com.ferreusveritas.dynamictrees.systems.GrowSignal;
 import com.ferreusveritas.dynamictrees.systems.dropcreators.DropCreatorSeed;
 import com.ferreusveritas.dynamictrees.trees.Species;
 import com.ferreusveritas.dynamictrees.trees.TreeFamily;
+import com.ferreusveritas.dynamictrees.util.SafeChunkBounds;
 
 import dynamictreestc.DynamicTreesTC;
 import dynamictreestc.ModContent;
@@ -114,13 +115,12 @@ public class TreeSilverwood extends TreeFamily {
 				}
 				return true;
 			}
-			
 			return false;
 		}
 		
 		@Override
-		public void postGeneration(World world, BlockPos rootPos, Biome biome, int radius, List<BlockPos> endPoints, boolean worldGen) {
-			super.postGeneration(world, rootPos, biome, radius, endPoints, worldGen);
+		public void postGeneration(World world, BlockPos rootPos, Biome biome, int radius, List<BlockPos> endPoints, boolean worldGen, SafeChunkBounds safeBounds) {
+			super.postGeneration(world, rootPos, biome, radius, endPoints, worldGen, safeBounds);
 			
 			if (worldGen) {
 				WorldGenerator flowers = new WorldGenCustomFlowers(BlocksTC.shimmerleaf, 0);
@@ -138,9 +138,7 @@ public class TreeSilverwood extends TreeFamily {
 		
 		ModContent.silverwoodLeavesProperties.setTree(this);
 		
-		this.addConnectableVanillaLeaves((state) -> {
-			return state.getBlock() == BlocksTC.leafSilverwood;
-		});
+		addConnectableVanillaLeaves((state) -> state.getBlock() == BlocksTC.leafSilverwood);
 	}
 	
 	@Override

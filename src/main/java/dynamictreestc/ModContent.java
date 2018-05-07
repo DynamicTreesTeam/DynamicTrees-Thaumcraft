@@ -21,6 +21,7 @@ import com.ferreusveritas.dynamictrees.trees.TreeFamily;
 import dynamictreestc.blocks.BlockDynamicLeavesSilverwood;
 import dynamictreestc.trees.TreeGreatwood;
 import dynamictreestc.trees.TreeSilverwood;
+import dynamictreestc.trees.species.SpeciesOakMagic;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockNewLeaf;
@@ -84,6 +85,10 @@ public class ModContent {
 					public int getSmotherLeavesMax() {
 						return 7;
 					}
+					@Override
+					public int getLightRequirement() {
+						return 13; // allow leaves to grow under the branches to make the tree more rounded
+					}
 				};
 		silverwoodLeavesProperties = new LeavesProperties(
 				BlocksTC.leafSilverwood.getDefaultState(),
@@ -108,6 +113,12 @@ public class ModContent {
 		
 		silverwoodLeavesProperties.setDynamicLeavesState(silverwoodLeaves.getDefaultState());
 		silverwoodLeaves.setProperties(0, silverwoodLeavesProperties);
+		
+		// Get vanilla tree families that will have species added to them
+		TreeFamily oakTree = TreeRegistry.findSpecies(new ResourceLocation(ModConstants.MODID, "oak")).getFamily();
+		
+		// Register new species of vanilla tree types
+		Species.REGISTRY.register(new SpeciesOakMagic(oakTree));
 		
 		// Register new tree types
 		TreeFamily greatwoodTree = new TreeGreatwood();

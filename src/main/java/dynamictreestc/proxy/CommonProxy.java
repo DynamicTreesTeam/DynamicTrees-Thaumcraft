@@ -6,15 +6,13 @@ import com.ferreusveritas.dynamictrees.ModConfigs;
 import com.ferreusveritas.dynamictrees.ModConstants;
 import com.ferreusveritas.dynamictrees.api.TreeRegistry;
 import com.ferreusveritas.dynamictrees.api.WorldGenRegistry;
-import com.ferreusveritas.dynamictrees.api.worldgen.IBiomeSpeciesSelector;
 import com.ferreusveritas.dynamictrees.trees.Species;
+import com.ferreusveritas.dynamictrees.worldgen.TreeGenerator;
 import com.google.common.base.Optional;
 
 import dynamictreestc.DynamicTreesTC;
 import dynamictreestc.dropcreators.DropCreatorFruit;
-import dynamictreestc.worldgen.BiomeDensityProvider;
-import dynamictreestc.worldgen.BiomeSpeciesSelector;
-import dynamictreestc.worldgen.DecorateEventHandler;
+import dynamictreestc.worldgen.BiomeDataBasePopulator;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -36,7 +34,6 @@ public class CommonProxy {
 	
 	public void preInit() {
 		if (WorldGenRegistry.isWorldGenEnabled()) {
-			MinecraftForge.TERRAIN_GEN_BUS.register(new DecorateEventHandler());
 			/* 
 			 * The only way to prevent Thaumcraft's trees from generating is to prevent
 			 * all of Thaumcraft's vegetation from generating, so we register a new
@@ -70,12 +67,14 @@ public class CommonProxy {
 		Species silverwood = TreeRegistry.findSpecies(new ResourceLocation(DynamicTreesTC.MODID, "silverwood"));
 		silverwood.addDropCreator(new DropCreatorFruit(new ItemStack(ItemsTC.nuggets, 1, 5)).setRarity(0.75f));
 		
+		Species oakMagic = TreeRegistry.findSpecies(new ResourceLocation(DynamicTreesTC.MODID, "oakmagic"));
+		TreeRegistry.findSpecies(new ResourceLocation(ModConstants.MODID, "oak")).getFamily().addSpeciesLocationOverride((access, trunkPos) -> {
+			if (access.getBiome(trunkPos) == BiomeHandler.MAGICAL_FOREST) return oakMagic;
+			return Species.NULLSPECIES;
+		});
+		
 		if (WorldGenRegistry.isWorldGenEnabled()) {
-			IBiomeSpeciesSelector biomeSpeciesSelector = new BiomeSpeciesSelector();
-			WorldGenRegistry.registerBiomeTreeSelector(biomeSpeciesSelector);
-			WorldGenRegistry.registerBiomeDensityProvider(new BiomeDensityProvider());
-			
-			biomeSpeciesSelector.init();
+			new BiomeDataBasePopulator(TreeGenerator.getTreeGenerator().biomeDataBase).populate();
 		}
 	}
 	

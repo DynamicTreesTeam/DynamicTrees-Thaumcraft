@@ -6,6 +6,7 @@ import com.ferreusveritas.dynamictrees.api.IGenFeature;
 import com.ferreusveritas.dynamictrees.trees.Species;
 import com.ferreusveritas.dynamictrees.util.CoordUtils;
 import com.ferreusveritas.dynamictrees.util.MathHelper;
+import com.ferreusveritas.dynamictrees.util.SafeChunkBounds;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockVine;
@@ -44,17 +45,17 @@ public class FeatureGenWeb implements IGenFeature {
 	}
 	
 	@Override
-	public void gen(World world, BlockPos treePos, List<BlockPos> endPoints) {
+	public void gen(World world, BlockPos treePos, List<BlockPos> endPoints, SafeChunkBounds safeBounds) {
 		if (!endPoints.isEmpty()) {
 			for (int i = 0; i < qty; i++) {
 				BlockPos endPoint = endPoints.get(world.rand.nextInt(endPoints.size()));
-				addWeb(world, species, treePos, endPoint);
+				addWeb(world, species, treePos, endPoint, safeBounds);
 			}
 		}
 	}
 	
-	protected void addWeb(World world, Species species, BlockPos treePos, BlockPos branchPos) {
-		RayTraceResult result = CoordUtils.branchRayTrace(world, species, treePos, branchPos, 90, verSpread, rayDistance);
+	protected void addWeb(World world, Species species, BlockPos treePos, BlockPos branchPos, SafeChunkBounds safeBounds) {
+		RayTraceResult result = CoordUtils.branchRayTrace(world, species, treePos, branchPos, 90, verSpread, rayDistance, safeBounds);
 		
 		if (result != null) {
 			BlockPos webPos = result.getBlockPos().offset(result.sideHit);
