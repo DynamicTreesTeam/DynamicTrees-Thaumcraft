@@ -1,0 +1,8 @@
+item.greatwoodseed.name=宏伟之树种子
+item.silverwoodseed.name=银树种子
+
+tile.leaves0.name=有活力的树叶
+tile.leaves_silverwood.name=有活力的树叶
+
+tile.dynamictreestc:greatwoodbranch.name=有活力的宏伟之树
+tile.dynamictreestc:silverwoodbranch.name=有活力的宏伟之树
