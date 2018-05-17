@@ -15,8 +15,6 @@ import com.ferreusveritas.dynamictrees.util.SafeChunkBounds;
 
 import dynamictreestc.DynamicTreesTC;
 import dynamictreestc.ModContent;
-import dynamictreestc.dropcreators.DropCreatorFruit;
-import dynamictreestc.trees.TreeGreatwood.SpeciesGreatwood;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDirt;
 import net.minecraft.block.BlockGrass;
@@ -32,7 +30,6 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraftforge.common.BiomeDictionary.Type;
 import thaumcraft.api.blocks.BlocksTC;
-import thaumcraft.api.items.ItemsTC;
 import thaumcraft.common.world.biomes.BiomeHandler;
 import thaumcraft.common.world.objects.WorldGenCustomFlowers;
 
@@ -119,10 +116,10 @@ public class TreeSilverwood extends TreeFamily {
 		}
 		
 		@Override
-		public void postGeneration(World world, BlockPos rootPos, Biome biome, int radius, List<BlockPos> endPoints, boolean worldGen, SafeChunkBounds safeBounds) {
-			super.postGeneration(world, rootPos, biome, radius, endPoints, worldGen, safeBounds);
+		public void postGeneration(World world, BlockPos rootPos, Biome biome, int radius, List<BlockPos> endPoints, SafeChunkBounds safeBounds) {
+			super.postGeneration(world, rootPos, biome, radius, endPoints, safeBounds);
 			
-			if (worldGen) {
+			if (safeBounds != SafeChunkBounds.ANY) {
 				WorldGenerator flowers = new WorldGenCustomFlowers(BlocksTC.shimmerleaf, 0);
 				flowers.generate(world, world.rand, rootPos.up());
 			}
@@ -161,5 +158,5 @@ public class TreeSilverwood extends TreeFamily {
 			}
 		};
 	}
-		
+	
 }

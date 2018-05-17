@@ -1,9 +1,6 @@
 package dynamictreestc;
 
-import com.ferreusveritas.dynamictrees.api.WorldGenRegistry;
-
 import dynamictreestc.proxy.CommonProxy;
-import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -29,12 +26,12 @@ public class DynamicTreesTC {
 	public void preInit(FMLPreInitializationEvent event) {
 		proxy.preInit();
 	}
-
+	
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
 		proxy.init();
 	}
-
+	
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event) throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException {
 		proxy.postInit();

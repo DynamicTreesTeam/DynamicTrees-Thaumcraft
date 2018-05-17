@@ -4,11 +4,8 @@ import java.util.List;
 import java.util.Random;
 
 import com.ferreusveritas.dynamictrees.ModBlocks;
-import com.ferreusveritas.dynamictrees.ModConfigs;
 import com.ferreusveritas.dynamictrees.api.TreeHelper;
-import com.ferreusveritas.dynamictrees.api.treedata.ILeavesProperties;
 import com.ferreusveritas.dynamictrees.items.Seed;
-import com.ferreusveritas.dynamictrees.systems.dropcreators.DropCreatorApple;
 import com.ferreusveritas.dynamictrees.trees.SpeciesRare;
 import com.ferreusveritas.dynamictrees.trees.TreeFamily;
 import com.ferreusveritas.dynamictrees.util.SafeChunkBounds;
@@ -29,7 +26,7 @@ import thaumcraft.api.blocks.BlocksTC;
 import thaumcraft.common.world.biomes.BiomeHandler;
 
 public class SpeciesOakMagic extends SpeciesRare {
-
+	
 	public SpeciesOakMagic(TreeFamily treeFamily) {
 		super(new ResourceLocation(DynamicTreesTC.MODID, treeFamily.getName().getResourcePath() + "magic"), treeFamily, ModBlocks.oakLeavesProperties);
 		
@@ -75,11 +72,11 @@ public class SpeciesOakMagic extends SpeciesRare {
 	}
 	
 	@Override
-	public void postGeneration(World world, BlockPos rootPos, Biome biome, int radius, List<BlockPos> endPoints, boolean worldGen, SafeChunkBounds safeBounds) {
-		super.postGeneration(world, rootPos, biome, radius, endPoints, worldGen, safeBounds);
+	public void postGeneration(World world, BlockPos rootPos, Biome biome, int radius, List<BlockPos> endPoints, SafeChunkBounds safeBounds) {
+		super.postGeneration(world, rootPos, biome, radius, endPoints, safeBounds);
 		
 		// Supplement Thaumcraft's vishroom generation
-		if (worldGen && biome == BiomeHandler.MAGICAL_FOREST && world.rand.nextInt(6) == 0) {
+		if (safeBounds != SafeChunkBounds.ANY && biome == BiomeHandler.MAGICAL_FOREST && world.rand.nextInt(6) == 0) {
 			placeVishroom(world, rootPos);
 		}
 	}
@@ -98,5 +95,5 @@ public class SpeciesOakMagic extends SpeciesRare {
 			pos = pos.up();
 		}
 	}
-
+	
 }

@@ -2,13 +2,11 @@ package dynamictreestc.proxy;
 
 import java.util.Random;
 
-import com.ferreusveritas.dynamictrees.ModConfigs;
 import com.ferreusveritas.dynamictrees.ModConstants;
 import com.ferreusveritas.dynamictrees.api.TreeRegistry;
 import com.ferreusveritas.dynamictrees.api.WorldGenRegistry;
 import com.ferreusveritas.dynamictrees.trees.Species;
 import com.ferreusveritas.dynamictrees.worldgen.TreeGenerator;
-import com.google.common.base.Optional;
 
 import dynamictreestc.DynamicTreesTC;
 import dynamictreestc.dropcreators.DropCreatorFruit;
@@ -21,7 +19,6 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.IChunkGenerator;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.IWorldGenerator;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import thaumcraft.api.blocks.BlocksTC;
@@ -46,23 +43,23 @@ public class CommonProxy {
 					
 					if ((blacklist == -1) && (!world.getWorldInfo().getTerrainType().getName().startsWith("flat"))) {
 						Biome bgb = world.getBiome(new BlockPos(chunkX * 16 + 8, 50, chunkZ * 16 + 8));
-					    if (BiomeHandler.getBiomeBlacklist(Biome.getIdForBiome(bgb)) != -1) return;
+						if (BiomeHandler.getBiomeBlacklist(Biome.getIdForBiome(bgb)) != -1) return;
 						
-					    int randPosX = chunkX * 16 + 8;
-					    int randPosZ = chunkZ * 16 + 8;
-					    BlockPos bp = world.getHeight(new BlockPos(randPosX, 0, randPosZ));
-					    
-					    if (world.getBiome(bp).topBlock.getBlock() == Blocks.SAND && world.getBiome(bp).getTemperature(bp) > 1.0F && random.nextInt(30) == 0) {
-					    	ThaumcraftWorldGenerator.INSTANCE.generateFlowers(world, random, bp, BlocksTC.cinderpearl, 0);
-					    }
+						int randPosX = chunkX * 16 + 8;
+						int randPosZ = chunkZ * 16 + 8;
+						BlockPos bp = world.getHeight(new BlockPos(randPosX, 0, randPosZ));
+						
+						if (world.getBiome(bp).topBlock.getBlock() == Blocks.SAND && world.getBiome(bp).getTemperature(bp) > 1.0F && random.nextInt(30) == 0) {
+							ThaumcraftWorldGenerator.generateFlowers(world, random, bp, BlocksTC.cinderpearl, 0);
+						}
 					}
 				}
 			}, 0);
-				
+			
 			ModConfig.CONFIG_WORLD.generateTrees = false; // Disable Thaumcraft's vegetation generation
 		}
 	}
-
+	
 	public void init() {
 		Species silverwood = TreeRegistry.findSpecies(new ResourceLocation(DynamicTreesTC.MODID, "silverwood"));
 		silverwood.addDropCreator(new DropCreatorFruit(new ItemStack(ItemsTC.nuggets, 1, 5)).setRarity(0.75f));

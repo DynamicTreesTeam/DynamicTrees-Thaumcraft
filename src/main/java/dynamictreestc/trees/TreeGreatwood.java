@@ -3,15 +3,13 @@ package dynamictreestc.trees;
 import java.util.List;
 import java.util.Random;
 
-import com.ferreusveritas.dynamictrees.ModBlocks;
 import com.ferreusveritas.dynamictrees.api.TreeHelper;
 import com.ferreusveritas.dynamictrees.blocks.BlockDynamicSapling;
-import com.ferreusveritas.dynamictrees.items.Seed;
 import com.ferreusveritas.dynamictrees.systems.GrowSignal;
 import com.ferreusveritas.dynamictrees.systems.dropcreators.DropCreatorSeed;
+import com.ferreusveritas.dynamictrees.trees.Species;
 import com.ferreusveritas.dynamictrees.trees.TreeFamily;
 import com.ferreusveritas.dynamictrees.util.SafeChunkBounds;
-import com.ferreusveritas.dynamictrees.trees.Species;
 
 import dynamictreestc.DynamicTreesTC;
 import dynamictreestc.ModContent;
@@ -33,12 +31,10 @@ import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraft.world.storage.loot.LootTableList;
 import net.minecraftforge.common.BiomeDictionary.Type;
 import thaumcraft.api.blocks.BlocksTC;
 import thaumcraft.common.world.biomes.BiomeHandler;
-import thaumcraft.common.world.objects.WorldGenCustomFlowers;
 
 public class TreeGreatwood extends TreeFamily {
 	
@@ -134,8 +130,10 @@ public class TreeGreatwood extends TreeFamily {
 		}
 		
 		@Override
-		public void postGeneration(World world, BlockPos rootPos, Biome biome, int radius, List<BlockPos> endPoints, boolean worldGen, SafeChunkBounds safeBounds) {
-			super.postGeneration(world, rootPos, biome, radius, endPoints, worldGen, safeBounds);
+		public void postGeneration(World world, BlockPos rootPos, Biome biome, int radius, List<BlockPos> endPoints, SafeChunkBounds safeBounds) {
+			super.postGeneration(world, rootPos, biome, radius, endPoints, safeBounds);
+			
+			boolean worldGen = safeBounds != SafeChunkBounds.ANY;
 			
 			// Add spiders to some greatwoods
 			int spiderChance = biome == BiomeHandler.MAGICAL_FOREST ? 21 : 8; // Lower chance in Magical Forests due to higher tree density
@@ -206,5 +204,5 @@ public class TreeGreatwood extends TreeFamily {
 		blockList.add(getCommonSpecies().getDynamicSapling().getBlock());
 		return super.getRegisterableBlocks(blockList);
 	}
-
+	
 }

@@ -1,11 +1,8 @@
 package dynamictreestc.worldgen;
 
-import com.ferreusveritas.dynamictrees.api.worldgen.BiomePropertySelectors.EnumChance;
-import com.ferreusveritas.dynamictrees.api.worldgen.BiomePropertySelectors.IChanceSelector;
-import com.ferreusveritas.dynamictrees.api.worldgen.BiomePropertySelectors.ISpeciesSelector;
-import com.ferreusveritas.dynamictrees.api.worldgen.BiomePropertySelectors.RandomSpeciesSelector;
-import com.ferreusveritas.dynamictrees.ModConstants;
 import com.ferreusveritas.dynamictrees.api.TreeRegistry;
+import com.ferreusveritas.dynamictrees.api.worldgen.BiomePropertySelectors.EnumChance;
+import com.ferreusveritas.dynamictrees.api.worldgen.BiomePropertySelectors.RandomSpeciesSelector;
 import com.ferreusveritas.dynamictrees.api.worldgen.IBiomeDataBasePopulator;
 import com.ferreusveritas.dynamictrees.trees.Species;
 import com.ferreusveritas.dynamictrees.worldgen.BiomeDataBase;
@@ -17,7 +14,7 @@ import net.minecraft.world.biome.Biome;
 import thaumcraft.common.world.biomes.BiomeHandler;
 
 public class BiomeDataBasePopulator implements IBiomeDataBasePopulator {
-
+	
 	protected final BiomeDataBase dbase;
 	
 	private Species greatwood, silverwood, oakMagic;
@@ -71,5 +68,5 @@ public class BiomeDataBasePopulator implements IBiomeDataBasePopulator {
 		}, Operation.REPLACE);
 		dbase.setCancelVanillaTreeGen(BiomeHandler.MAGICAL_FOREST, true);
 	}
-
+	
 }
