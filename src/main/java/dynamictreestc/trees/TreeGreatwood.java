@@ -62,7 +62,7 @@ public class TreeGreatwood extends TreeFamily {
 			addDropCreator(new DropCreatorSeed(0.25f) {
 				@Override
 				public List<ItemStack> getHarvestDrop(World world, Species species, BlockPos leafPos, Random random, List<ItemStack> dropList, int soilLife, int fortune) {
-					int chance = 132;
+					int chance = 150;
 					if (fortune > 0) {
 						chance -= 2 << fortune;
 						if (chance < 10) { 
@@ -136,7 +136,7 @@ public class TreeGreatwood extends TreeFamily {
 			boolean worldGen = safeBounds != SafeChunkBounds.ANY;
 			
 			// Add spiders to some greatwoods
-			int spiderChance = biome == BiomeHandler.MAGICAL_FOREST ? 21 : 8; // Lower chance in Magical Forests due to higher tree density
+			int spiderChance = biome == BiomeHandler.MAGICAL_FOREST ? 28 : 8; // Lower chance in Magical Forests due to higher tree density
 			if (worldGen && world.rand.nextInt(spiderChance) == 0) {
 				addSpiders(world, rootPos, endPoints, safeBounds);
 			}
