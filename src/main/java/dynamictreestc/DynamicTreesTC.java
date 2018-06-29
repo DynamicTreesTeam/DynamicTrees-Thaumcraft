@@ -14,7 +14,7 @@ public class DynamicTreesTC {
 	public static final String MODID = "dynamictreestc";
 	public static final String NAME = "Dynamic Trees TC";
 	public static final String VERSION = "@VERSION@";
-	public static final String DEPENDENCIES = "required-after:dynamictrees@[1.12.2-0.7.7e,);required-after:thaumcraft";
+	public static final String DEPENDENCIES = "required-after:dynamictrees@[1.12.2-0.7.8,);required-after:thaumcraft";
 	
 	@Mod.Instance
 	public static DynamicTreesTC instance;
