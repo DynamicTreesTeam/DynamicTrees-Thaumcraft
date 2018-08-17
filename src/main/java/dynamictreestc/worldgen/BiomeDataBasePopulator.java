@@ -11,6 +11,7 @@ import com.ferreusveritas.dynamictrees.worldgen.BiomeDataBase.Operation;
 import dynamictreestc.DynamicTreesTC;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.Biome;
+import net.minecraftforge.common.BiomeDictionary;
 import thaumcraft.common.world.biomes.BiomeHandler;
 
 public class BiomeDataBasePopulator implements IBiomeDataBasePopulator {
@@ -44,6 +45,8 @@ public class BiomeDataBasePopulator implements IBiomeDataBasePopulator {
 					selector.add(silverwood, 1);
 					flag = true;
 				}
+				
+				if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.NETHER)) flag = false;
 				
 				if (flag) {
 					dbase.setSpeciesSelector(biome, selector, Operation.SPLICE_BEFORE);

@@ -55,7 +55,7 @@ public class TreeSilverwood extends TreeFamily {
 			addDropCreator(new DropCreatorSeed(0.25f) {
 				@Override
 				public List<ItemStack> getHarvestDrop(World world, Species species, BlockPos leafPos, Random random, List<ItemStack> dropList, int soilLife, int fortune) {
-					int chance = 100;
+					int chance = 176;
 					if (fortune > 0) {
 						chance -= 2 << fortune;
 						if (chance < 10) { 
