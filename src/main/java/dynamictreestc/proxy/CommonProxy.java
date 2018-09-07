@@ -6,7 +6,6 @@ import com.ferreusveritas.dynamictrees.ModConstants;
 import com.ferreusveritas.dynamictrees.api.TreeRegistry;
 import com.ferreusveritas.dynamictrees.api.WorldGenRegistry;
 import com.ferreusveritas.dynamictrees.trees.Species;
-import com.ferreusveritas.dynamictrees.worldgen.TreeGenerator;
 
 import dynamictreestc.DynamicTreesTC;
 import dynamictreestc.dropcreators.DropCreatorFruit;
@@ -76,8 +75,8 @@ public class CommonProxy {
 			return Species.NULLSPECIES;
 		});
 		
-		if (WorldGenRegistry.isWorldGenEnabled() && worldGenTC) {
-			new BiomeDataBasePopulator(TreeGenerator.getTreeGenerator().biomeDataBase).populate();
+		if (worldGenTC) {
+			WorldGenRegistry.registerBiomeDataBasePopulator(new BiomeDataBasePopulator());
 		}
 	}
 	

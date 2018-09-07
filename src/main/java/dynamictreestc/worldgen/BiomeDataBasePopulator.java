@@ -16,19 +16,20 @@ import thaumcraft.common.world.biomes.BiomeHandler;
 
 public class BiomeDataBasePopulator implements IBiomeDataBasePopulator {
 	
-	protected final BiomeDataBase dbase;
+	private static Species greatwood, silverwood, oakMagic;
 	
-	private Species greatwood, silverwood, oakMagic;
-	
-	public BiomeDataBasePopulator(BiomeDataBase dbase) {
-		this.dbase = dbase;
-	}
-	
-	@Override
-	public void populate() {
+	private static void createStaticAliases() {
 		greatwood = TreeRegistry.findSpecies(new ResourceLocation(DynamicTreesTC.MODID, "greatwood"));
 		silverwood = TreeRegistry.findSpecies(new ResourceLocation(DynamicTreesTC.MODID, "silverwood"));
 		oakMagic = TreeRegistry.findSpecies(new ResourceLocation(DynamicTreesTC.MODID, "oakmagic"));
+	}
+	
+	@Override
+	public void populate(BiomeDataBase dbase) {
+		
+		if(greatwood == null) {
+			createStaticAliases();
+		}
 		
 		Biome.REGISTRY.forEach(biome -> {
 			int biomeId = Biome.getIdForBiome(biome);
