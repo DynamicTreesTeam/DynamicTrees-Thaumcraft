@@ -1,5 +1,7 @@
 package dynamictreestc;
 
+import com.ferreusveritas.dynamictrees.ModConstants;
+
 import dynamictreestc.proxy.CommonProxy;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -14,7 +16,7 @@ public class DynamicTreesTC {
 	public static final String MODID = "dynamictreestc";
 	public static final String NAME = "Dynamic Trees TC";
 	public static final String VERSION = "@VERSION@";
-	public static final String DEPENDENCIES = "required-after:dynamictrees@[1.12.2-0.8.1h,);required-after:thaumcraft";
+	public static final String DEPENDENCIES = "required-after:" + ModConstants.DYNAMICTREES_LATEST + ";required-after:thaumcraft";
 	
 	@Mod.Instance
 	public static DynamicTreesTC instance;
