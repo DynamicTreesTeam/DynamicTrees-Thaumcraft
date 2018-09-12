@@ -28,13 +28,7 @@ import thaumcraft.common.world.biomes.BiomeHandler;
 
 public class CommonProxy {
 	
-	//We'll use this to respect the Thaumcraft Worldgen settings that the user expects
-	public boolean worldGenTC;
-	
 	public void preInit() {
-		
-		worldGenTC = ModConfig.CONFIG_WORLD.generateTrees;
-		
 		if (WorldGenRegistry.isWorldGenEnabled()) {
 			/* 
 			 * The only way to prevent Thaumcraft's trees from generating is to prevent
@@ -75,9 +69,7 @@ public class CommonProxy {
 			return Species.NULLSPECIES;
 		});
 		
-		if (worldGenTC) {
-			WorldGenRegistry.registerBiomeDataBasePopulator(new BiomeDataBasePopulator());
-		}
+		WorldGenRegistry.registerBiomeDataBasePopulator(new BiomeDataBasePopulator());
 	}
 	
 	public void postInit() {
