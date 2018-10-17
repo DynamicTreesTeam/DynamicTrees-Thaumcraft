@@ -51,8 +51,8 @@ public class SpeciesOakMagic extends SpeciesRare {
 	}
 	
 	@Override
-	public boolean rot(World world, BlockPos pos, int neighborCount, int radius, Random random) {
-		if (super.rot(world, pos, neighborCount, radius, random)) {
+	public boolean rot(World world, BlockPos pos, int neighborCount, int radius, Random random, boolean rapid) {
+		if (super.rot(world, pos, neighborCount, radius, random, rapid)) {
 			if (radius > 4 && TreeHelper.isRooty(world.getBlockState(pos.down())) && world.getLightFor(EnumSkyBlock.SKY, pos) < 4) {
 				world.setBlockState(pos, BlocksTC.vishroom.getDefaultState()); // Change branch to a mushroom
 			}
@@ -72,8 +72,8 @@ public class SpeciesOakMagic extends SpeciesRare {
 	}
 	
 	@Override
-	public void postGeneration(World world, BlockPos rootPos, Biome biome, int radius, List<BlockPos> endPoints, SafeChunkBounds safeBounds) {
-		super.postGeneration(world, rootPos, biome, radius, endPoints, safeBounds);
+	public void postGeneration(World world, BlockPos rootPos, Biome biome, int radius, List<BlockPos> endPoints, SafeChunkBounds safeBounds, IBlockState initialDirtState) {
+		super.postGeneration(world, rootPos, biome, radius, endPoints, safeBounds, initialDirtState);
 		
 		// Supplement Thaumcraft's vishroom generation
 		if (safeBounds != SafeChunkBounds.ANY && biome == BiomeHandler.MAGICAL_FOREST && world.rand.nextInt(6) == 0) {
