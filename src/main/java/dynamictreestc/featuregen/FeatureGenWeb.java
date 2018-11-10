@@ -2,18 +2,20 @@ package dynamictreestc.featuregen;
 
 import java.util.List;
 
-import com.ferreusveritas.dynamictrees.api.IGenFeature;
+import com.ferreusveritas.dynamictrees.api.IPostGenFeature;
 import com.ferreusveritas.dynamictrees.trees.Species;
 import com.ferreusveritas.dynamictrees.util.CoordUtils;
 import com.ferreusveritas.dynamictrees.util.SafeChunkBounds;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
+import net.minecraft.world.biome.Biome;
 
-public class FeatureGenWeb implements IGenFeature {
+public class FeatureGenWeb implements IPostGenFeature {
 	
 	protected int qty = 16;
 	protected float verSpread = 60;
@@ -41,13 +43,15 @@ public class FeatureGenWeb implements IGenFeature {
 	}
 	
 	@Override
-	public void gen(World world, BlockPos treePos, List<BlockPos> endPoints, SafeChunkBounds safeBounds) {
+	public boolean postGeneration(World world, BlockPos rootPos, Biome biome, int radius, List<BlockPos> endPoints, SafeChunkBounds safeBounds, IBlockState initialDirtState) {
 		if (!endPoints.isEmpty()) {
 			for (int i = 0; i < qty; i++) {
 				BlockPos endPoint = endPoints.get(world.rand.nextInt(endPoints.size()));
-				addWeb(world, species, treePos, endPoint, safeBounds);
+				addWeb(world, species, rootPos, endPoint, safeBounds);
 			}
+			return true;
 		}
+		return false;
 	}
 	
 	protected void addWeb(World world, Species species, BlockPos treePos, BlockPos branchPos, SafeChunkBounds safeBounds) {

@@ -138,7 +138,7 @@ public class TreeGreatwood extends TreeFamily {
 			// Add spiders to some greatwoods
 			int spiderChance = biome == BiomeHandler.MAGICAL_FOREST ? 28 : 8; // Lower chance in Magical Forests due to higher tree density
 			if (worldGen && world.rand.nextInt(spiderChance) == 0) {
-				addSpiders(world, rootPos, endPoints, safeBounds);
+				addSpiders(world, rootPos, biome, radius, endPoints, safeBounds, initialDirtState);
 			}
 			
 			// Supplement Thaumcraft's vishroom generation
@@ -147,9 +147,9 @@ public class TreeGreatwood extends TreeFamily {
 			}
 		}
 		
-		public void addSpiders(World world, BlockPos rootPos, List<BlockPos> endPoints, SafeChunkBounds safeBounds) {
+		public void addSpiders(World world, BlockPos rootPos, Biome biome, int radius, List<BlockPos> endPoints, SafeChunkBounds safeBounds, IBlockState initialDirtState) {
 			int webQuantity = (int) (endPoints.size() * ((world.rand.nextFloat() * 0.5f) + 0.75f));
-			webGen.setQuantity(webQuantity).gen(world, rootPos, endPoints, safeBounds);
+			webGen.setQuantity(webQuantity).postGeneration(world, rootPos, biome, radius, endPoints, safeBounds, initialDirtState);
 			
 			BlockPos spawnerPos = rootPos.down();
 			world.setBlockState(spawnerPos, Blocks.MOB_SPAWNER.getDefaultState());
