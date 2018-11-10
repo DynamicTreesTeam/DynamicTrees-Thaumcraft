@@ -7,23 +7,23 @@ import com.ferreusveritas.dynamictrees.api.TreeHelper;
 import com.ferreusveritas.dynamictrees.blocks.BlockDynamicSapling;
 import com.ferreusveritas.dynamictrees.systems.GrowSignal;
 import com.ferreusveritas.dynamictrees.systems.dropcreators.DropCreatorSeed;
+import com.ferreusveritas.dynamictrees.systems.featuregen.FeatureGenGroup;
+import com.ferreusveritas.dynamictrees.systems.featuregen.FeatureGenPredicate;
 import com.ferreusveritas.dynamictrees.trees.Species;
 import com.ferreusveritas.dynamictrees.trees.TreeFamily;
-import com.ferreusveritas.dynamictrees.util.SafeChunkBounds;
 
 import dynamictreestc.DynamicTreesTC;
 import dynamictreestc.ModContent;
+import dynamictreestc.featuregen.FeatureGenDungeonChest;
+import dynamictreestc.featuregen.FeatureGenMobSpawner;
+import dynamictreestc.featuregen.FeatureGenVishroom;
 import dynamictreestc.featuregen.FeatureGenWeb;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDirt;
 import net.minecraft.block.BlockGrass;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.EntityList;
 import net.minecraft.entity.monster.EntityCaveSpider;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntityChest;
-import net.minecraft.tileentity.TileEntityMobSpawner;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
@@ -31,7 +31,6 @@ import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.storage.loot.LootTableList;
 import net.minecraftforge.common.BiomeDictionary.Type;
 import thaumcraft.api.blocks.BlocksTC;
 import thaumcraft.common.world.biomes.BiomeHandler;
@@ -39,9 +38,7 @@ import thaumcraft.common.world.biomes.BiomeHandler;
 public class TreeGreatwood extends TreeFamily {
 	
 	public class SpeciesGreatwood extends Species {
-		
-		FeatureGenWeb webGen;
-		
+				
 		SpeciesGreatwood(TreeFamily treeFamily) {
 			super(treeFamily.getName(), treeFamily, ModContent.greatwoodLeavesProperties);
 			
@@ -90,8 +87,20 @@ public class TreeGreatwood extends TreeFamily {
 					return dropList;
 				}
 			});
+
+			final Random rand = new Random();
 			
-			webGen = new FeatureGenWeb(this).setQuantity(12);
+			addGenFeature(new FeatureGenWeb(this));//Cobweb generator
+			
+			addGenFeature(// Add spiders to some greatwoods
+				new FeatureGenPredicate(
+					new FeatureGenGroup()//Add two features to the predicate.  If true they both run
+						.add(new FeatureGenMobSpawner(EntityCaveSpider.class, 1)) //Adds a cave spider spawner under the tree
+						.add(new FeatureGenDungeonChest(2)))//Create a dungeon loot chest under the base of the tree
+				.onlyWorldGen(true) //Only allow generation in world gen
+				.setBiomePredicate(biome -> rand.nextInt(biome == BiomeHandler.MAGICAL_FOREST ? 28 : 8) == 0 )// Lower chance in Magical Forests due to higher tree density
+			);
+			addGenFeature(new FeatureGenVishroom());//Supplement Thaumcraft's vishroom generation
 		}
 		
 		@Override
@@ -127,58 +136,6 @@ public class TreeGreatwood extends TreeFamily {
 				return true;
 			}
 			return false;
-		}
-		
-		@Override
-		public void postGeneration(World world, BlockPos rootPos, Biome biome, int radius, List<BlockPos> endPoints, SafeChunkBounds safeBounds, IBlockState initialDirtState) {
-			super.postGeneration(world, rootPos, biome, radius, endPoints, safeBounds, initialDirtState);
-			
-			boolean worldGen = safeBounds != SafeChunkBounds.ANY;
-			
-			// Add spiders to some greatwoods
-			int spiderChance = biome == BiomeHandler.MAGICAL_FOREST ? 28 : 8; // Lower chance in Magical Forests due to higher tree density
-			if (worldGen && world.rand.nextInt(spiderChance) == 0) {
-				addSpiders(world, rootPos, biome, radius, endPoints, safeBounds, initialDirtState);
-			}
-			
-			// Supplement Thaumcraft's vishroom generation
-			if (worldGen && biome == BiomeHandler.MAGICAL_FOREST && world.rand.nextInt(6) == 0) {
-				placeVishroom(world, rootPos);
-			}
-		}
-		
-		public void addSpiders(World world, BlockPos rootPos, Biome biome, int radius, List<BlockPos> endPoints, SafeChunkBounds safeBounds, IBlockState initialDirtState) {
-			int webQuantity = (int) (endPoints.size() * ((world.rand.nextFloat() * 0.5f) + 0.75f));
-			webGen.setQuantity(webQuantity).postGeneration(world, rootPos, biome, radius, endPoints, safeBounds, initialDirtState);
-			
-			BlockPos spawnerPos = rootPos.down();
-			world.setBlockState(spawnerPos, Blocks.MOB_SPAWNER.getDefaultState());
-			TileEntityMobSpawner spawner = (TileEntityMobSpawner) world.getTileEntity(spawnerPos);
-			if (spawner != null) {
-				spawner.getSpawnerBaseLogic().setEntityId(EntityList.getKey(EntityCaveSpider.class));
-			}
-			
-			BlockPos chestPos = rootPos.down(2);
-			world.setBlockState(chestPos, Blocks.CHEST.getDefaultState());
-			TileEntityChest chest = (TileEntityChest) world.getTileEntity(chestPos);
-			if (chest != null) {
-				chest.setLootTable(LootTableList.CHESTS_SIMPLE_DUNGEON, world.rand.nextLong());
-			}
-		}
-		
-		public void placeVishroom(World world, BlockPos rootPos) {
-			EnumFacing dir = EnumFacing.HORIZONTALS[world.rand.nextInt(4)];
-			BlockPos pos = rootPos.offset(dir);
-			EnumFacing dir2 = EnumFacing.HORIZONTALS[world.rand.nextInt(4)];
-			if (dir2 != dir && dir2 != dir.getOpposite()) pos = pos.offset(dir2);
-			
-			for (int i = 0; i < 3; i++) {
-				if (BlocksTC.vishroom.canPlaceBlockAt(world, pos)) {
-					world.setBlockState(pos, BlocksTC.vishroom.getDefaultState());
-					break;
-				}
-				pos = pos.up();
-			}
 		}
 		
 	}

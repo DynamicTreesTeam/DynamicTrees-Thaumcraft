@@ -15,9 +15,9 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 
+/** Place cobwebs in the trees leaves */
 public class FeatureGenWeb implements IPostGenFeature {
 	
-	protected int qty = 16;
 	protected float verSpread = 60;
 	protected float rayDistance = 4;
 	protected Species species;
@@ -25,11 +25,6 @@ public class FeatureGenWeb implements IPostGenFeature {
 	
 	public FeatureGenWeb(Species species) {
 		this.species = species;
-	}
-	
-	public FeatureGenWeb setQuantity(int qty) {
-		this.qty = qty;
-		return this;
 	}
 	
 	public FeatureGenWeb setVerSpread(float verSpread) {
@@ -45,6 +40,8 @@ public class FeatureGenWeb implements IPostGenFeature {
 	@Override
 	public boolean postGeneration(World world, BlockPos rootPos, Biome biome, int radius, List<BlockPos> endPoints, SafeChunkBounds safeBounds, IBlockState initialDirtState) {
 		if (!endPoints.isEmpty()) {
+			int qty = (int) (endPoints.size() * ((world.rand.nextFloat() * 0.5f) + 0.75f));
+			
 			for (int i = 0; i < qty; i++) {
 				BlockPos endPoint = endPoints.get(world.rand.nextInt(endPoints.size()));
 				addWeb(world, species, rootPos, endPoint, safeBounds);
@@ -63,11 +60,6 @@ public class FeatureGenWeb implements IPostGenFeature {
 				world.setBlockState(webPos, webBlock.getDefaultState());
 			}
 		}
-	}
-	
-	public static int coordHashCode(BlockPos pos) {
-		int hash = (pos.getX() * 4111 ^ pos.getY() * 271 ^ pos.getZ() * 3067) >> 1;
-		return hash & 0xFFFF;
 	}
 	
 }

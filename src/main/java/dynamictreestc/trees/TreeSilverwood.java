@@ -11,10 +11,10 @@ import com.ferreusveritas.dynamictrees.systems.GrowSignal;
 import com.ferreusveritas.dynamictrees.systems.dropcreators.DropCreatorSeed;
 import com.ferreusveritas.dynamictrees.trees.Species;
 import com.ferreusveritas.dynamictrees.trees.TreeFamily;
-import com.ferreusveritas.dynamictrees.util.SafeChunkBounds;
 
 import dynamictreestc.DynamicTreesTC;
 import dynamictreestc.ModContent;
+import dynamictreestc.featuregen.FeatureGenShimmerleaf;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDirt;
 import net.minecraft.block.BlockGrass;
@@ -27,11 +27,9 @@ import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraftforge.common.BiomeDictionary.Type;
 import thaumcraft.api.blocks.BlocksTC;
 import thaumcraft.common.world.biomes.BiomeHandler;
-import thaumcraft.common.world.objects.WorldGenCustomFlowers;
 
 public class TreeSilverwood extends TreeFamily {
 	
@@ -83,6 +81,8 @@ public class TreeSilverwood extends TreeFamily {
 					return dropList;
 				}
 			});
+			
+			addGenFeature(new FeatureGenShimmerleaf());
 		}
 		
 		@Override
@@ -113,16 +113,6 @@ public class TreeSilverwood extends TreeFamily {
 				return true;
 			}
 			return false;
-		}
-		
-		@Override
-		public void postGeneration(World world, BlockPos rootPos, Biome biome, int radius, List<BlockPos> endPoints, SafeChunkBounds safeBounds, IBlockState initialDirtState) {
-			super.postGeneration(world, rootPos, biome, radius, endPoints, safeBounds, initialDirtState);
-			
-			if (safeBounds != SafeChunkBounds.ANY) {
-				WorldGenerator flowers = new WorldGenCustomFlowers(BlocksTC.shimmerleaf, 0);
-				flowers.generate(world, world.rand, rootPos.up());
-			}
 		}
 		
 	}
