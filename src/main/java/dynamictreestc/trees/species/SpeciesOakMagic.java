@@ -11,6 +11,7 @@ import com.ferreusveritas.dynamictrees.trees.TreeFamily;
 import com.ferreusveritas.dynamictrees.util.SafeChunkBounds;
 
 import dynamictreestc.DynamicTreesTC;
+import dynamictreestc.featuregen.FeatureGenVishroom;
 import net.minecraft.block.BlockDirt;
 import net.minecraft.block.BlockGrass;
 import net.minecraft.block.state.IBlockState;
@@ -30,7 +31,7 @@ public class SpeciesOakMagic extends SpeciesRare {
 	public SpeciesOakMagic(TreeFamily treeFamily) {
 		super(new ResourceLocation(DynamicTreesTC.MODID, treeFamily.getName().getResourcePath() + "magic"), treeFamily, ModBlocks.oakLeavesProperties);
 		
-		setBasicGrowingParameters(0.1f, 14.0f, 4, 4, 1.25f);
+		setBasicGrowingParameters(0.3f, 14.0f, 4, 4, 1.25f);
 		
 		envFactor(Type.COLD, 0.75f);
 		envFactor(Type.HOT, 0.50f);
@@ -38,6 +39,8 @@ public class SpeciesOakMagic extends SpeciesRare {
 		envFactor(Type.FOREST, 1.05f);
 		
 		setupStandardSeedDropping();
+		
+		addGenFeature(new FeatureGenVishroom());//Supplement Thaumcraft's vishroom generation
 	}
 	
 	@Override
@@ -72,28 +75,8 @@ public class SpeciesOakMagic extends SpeciesRare {
 	}
 	
 	@Override
-	public void postGeneration(World world, BlockPos rootPos, Biome biome, int radius, List<BlockPos> endPoints, SafeChunkBounds safeBounds, IBlockState initialDirtState) {
-		super.postGeneration(world, rootPos, biome, radius, endPoints, safeBounds, initialDirtState);
-		
-		// Supplement Thaumcraft's vishroom generation
-		if (safeBounds != SafeChunkBounds.ANY && biome == BiomeHandler.MAGICAL_FOREST && world.rand.nextInt(6) == 0) {
-			placeVishroom(world, rootPos);
-		}
-	}
-	
-	public void placeVishroom(World world, BlockPos rootPos) {
-		EnumFacing dir = EnumFacing.HORIZONTALS[world.rand.nextInt(4)];
-		BlockPos pos = rootPos.offset(dir);
-		EnumFacing dir2 = EnumFacing.HORIZONTALS[world.rand.nextInt(4)];
-		if (dir2 != dir && dir2 != dir.getOpposite()) pos = pos.offset(dir2);
-		
-		for (int i = 0; i < 3; i++) {
-			if (BlocksTC.vishroom.canPlaceBlockAt(world, pos)) {
-				world.setBlockState(pos, BlocksTC.vishroom.getDefaultState());
-				break;
-			}
-			pos = pos.up();
-		}
+	public boolean isThick() {
+		return false;
 	}
 	
 }

@@ -36,11 +36,11 @@ public class BiomeDataBasePopulator implements IBiomeDataBasePopulator {
 			float greatwoodChance = BiomeHandler.getBiomeSupportsGreatwood(biomeId);
 			
 			if (biome != BiomeHandler.MAGICAL_FOREST && biome != BiomeHandler.ELDRITCH) {	
-				RandomSpeciesSelector selector = new RandomSpeciesSelector().add(480);
+				RandomSpeciesSelector selector = new RandomSpeciesSelector().add(640);
 				boolean flag = false;
 				
 				if (greatwoodChance > 0) {
-					selector.add(greatwood, 4).add(silverwood, 1);
+					selector.add(greatwood, 3).add(silverwood, 1);
 					flag = true;
 				} else if (biomeId == 18 || biomeId == 28) {
 					selector.add(silverwood, 1);
