@@ -6,10 +6,10 @@ import java.util.Collections;
 import com.ferreusveritas.dynamictrees.ModConstants;
 import com.ferreusveritas.dynamictrees.ModItems;
 import com.ferreusveritas.dynamictrees.ModRecipes;
-import com.ferreusveritas.dynamictrees.api.TreeHelper;
 import com.ferreusveritas.dynamictrees.api.TreeRegistry;
 import com.ferreusveritas.dynamictrees.api.client.ModelHelper;
 import com.ferreusveritas.dynamictrees.api.treedata.ILeavesProperties;
+import com.ferreusveritas.dynamictrees.blocks.LeavesPaging;
 import com.ferreusveritas.dynamictrees.blocks.LeavesProperties;
 import com.ferreusveritas.dynamictrees.items.DendroPotion.DendroPotionType;
 import com.ferreusveritas.dynamictrees.trees.Species;
@@ -94,7 +94,7 @@ public class ModContent {
 				};
 		
 		// Generate leaves for leaves properties
-		TreeHelper.getLeavesBlockForSequence(DynamicTreesTC.MODID, 0, greatwoodLeavesProperties);
+		LeavesPaging.getLeavesBlockForSequence(DynamicTreesTC.MODID, 0, greatwoodLeavesProperties);
 		
 		silverwoodLeavesProperties.setDynamicLeavesState(silverwoodLeaves.getDefaultState());
 		silverwoodLeaves.setProperties(0, silverwoodLeavesProperties);
@@ -114,7 +114,7 @@ public class ModContent {
 		
 		ArrayList<Block> treeBlocks = new ArrayList<>();
 		trees.forEach(tree -> tree.getRegisterableBlocks(treeBlocks));
-		treeBlocks.addAll(TreeHelper.getLeavesMapForModId(DynamicTreesTC.MODID).values());
+		treeBlocks.addAll(LeavesPaging.getLeavesMapForModId(DynamicTreesTC.MODID).values());
 		registry.registerAll(treeBlocks.toArray(new Block[treeBlocks.size()]));
 	}
 	
@@ -156,7 +156,7 @@ public class ModContent {
 			ModelHelper.regModel(tree);
 		}
 		
-		TreeHelper.getLeavesMapForModId(DynamicTreesTC.MODID).forEach((key, leaves) -> ModelLoader.setCustomStateMapper(leaves, new StateMap.Builder().ignore(BlockLeaves.DECAYABLE).build()));
+		LeavesPaging.getLeavesMapForModId(DynamicTreesTC.MODID).forEach((key, leaves) -> ModelLoader.setCustomStateMapper(leaves, new StateMap.Builder().ignore(BlockLeaves.DECAYABLE).build()));
 		ModelLoader.setCustomStateMapper(silverwoodLeaves, new StateMap.Builder().ignore(BlockLeaves.DECAYABLE).build());
 	}
 	
