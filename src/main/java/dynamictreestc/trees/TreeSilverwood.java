@@ -6,9 +6,7 @@ import java.util.function.BiFunction;
 
 import com.ferreusveritas.dynamictrees.api.TreeHelper;
 import com.ferreusveritas.dynamictrees.blocks.BlockBranch;
-import com.ferreusveritas.dynamictrees.blocks.BlockBranchBasic;
 import com.ferreusveritas.dynamictrees.blocks.BlockBranchThick;
-import com.ferreusveritas.dynamictrees.blocks.BlockDynamicSapling;
 import com.ferreusveritas.dynamictrees.blocks.BlockSurfaceRoot;
 import com.ferreusveritas.dynamictrees.systems.GrowSignal;
 import com.ferreusveritas.dynamictrees.systems.dropcreators.DropCreatorSeed;
@@ -48,9 +46,7 @@ public class TreeSilverwood extends TreeFamily {
 			super(treeFamily.getName(), treeFamily, ModContent.silverwoodLeavesProperties);
 			
 			setBasicGrowingParameters(1.15f, 12.0f, 6, 4, 0.75f);
-			
-			setDynamicSapling(new BlockDynamicSapling("silverwoodsapling").getDefaultState());
-			
+						
 			envFactor(Type.COLD, 0.75f);
 			envFactor(Type.HOT, 0.75f);
 			envFactor(Type.DRY, 0.5f);
@@ -170,7 +166,6 @@ public class TreeSilverwood extends TreeFamily {
 	
 	@Override
 	public List<Block> getRegisterableBlocks(List<Block> blockList) {
-		blockList.add(getCommonSpecies().getDynamicSapling().getBlock());
 		blockList.add(surfaceRootBlock);
 		return super.getRegisterableBlocks(blockList);
 	}

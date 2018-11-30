@@ -1,0 +1,7 @@
+{   "parent": "dynamictrees:block/sapling",
+    "textures": {
+        "particle": "thaumcraft:blocks/leaves_greatwood",
+        "log": "thaumcraft:blocks/log_greatwood",
+        "leaves": "thaumcraft:blocks/leaves_greatwood"
+    }
+}

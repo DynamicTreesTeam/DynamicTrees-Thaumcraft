@@ -5,7 +5,6 @@ import java.util.Random;
 import java.util.function.BiFunction;
 
 import com.ferreusveritas.dynamictrees.api.TreeHelper;
-import com.ferreusveritas.dynamictrees.blocks.BlockDynamicSapling;
 import com.ferreusveritas.dynamictrees.blocks.BlockSurfaceRoot;
 import com.ferreusveritas.dynamictrees.systems.GrowSignal;
 import com.ferreusveritas.dynamictrees.systems.dropcreators.DropCreatorSeed;
@@ -52,9 +51,7 @@ public class TreeGreatwood extends TreeFamily {
 			
 			setBasicGrowingParameters(0.5f, 22.0f, 8, 7, 1.25f);
 			setSoilLongevity(14); // Grows for a long long time
-			
-			setDynamicSapling(new BlockDynamicSapling("greatwoodsapling").getDefaultState());
-			
+						
 			envFactor(Type.COLD, 0.75f);
 			envFactor(Type.HOT, 0.75f);
 			envFactor(Type.DRY, 0.5f);
@@ -192,7 +189,6 @@ public class TreeGreatwood extends TreeFamily {
 	
 	@Override
 	public List<Block> getRegisterableBlocks(List<Block> blockList) {
-		blockList.add(getCommonSpecies().getDynamicSapling().getBlock());
 		blockList.add(surfaceRootBlock);
 		return super.getRegisterableBlocks(blockList);
 	}
