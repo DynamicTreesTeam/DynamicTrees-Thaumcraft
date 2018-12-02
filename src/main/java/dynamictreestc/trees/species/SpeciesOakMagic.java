@@ -2,7 +2,6 @@ package dynamictreestc.trees.species;
 
 import java.util.Random;
 
-import com.ferreusveritas.dynamictrees.ModBlocks;
 import com.ferreusveritas.dynamictrees.api.TreeHelper;
 import com.ferreusveritas.dynamictrees.items.Seed;
 import com.ferreusveritas.dynamictrees.trees.SpeciesRare;
@@ -26,7 +25,7 @@ import thaumcraft.common.world.biomes.BiomeHandler;
 public class SpeciesOakMagic extends SpeciesRare {
 	
 	public SpeciesOakMagic(TreeFamily treeFamily) {
-		super(new ResourceLocation(DynamicTreesTC.MODID, treeFamily.getName().getResourcePath() + "magic"), treeFamily, ModBlocks.leaves.get("oak"));
+		super(new ResourceLocation(DynamicTreesTC.MODID, treeFamily.getName().getResourcePath() + "magic"), treeFamily);
 		
 		setBasicGrowingParameters(0.3f, 14.0f, 4, 4, 1.25f);
 		
