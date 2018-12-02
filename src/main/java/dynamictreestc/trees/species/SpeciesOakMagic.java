@@ -1,6 +1,5 @@
 package dynamictreestc.trees.species;
 
-import java.util.List;
 import java.util.Random;
 
 import com.ferreusveritas.dynamictrees.ModBlocks;
@@ -8,7 +7,6 @@ import com.ferreusveritas.dynamictrees.api.TreeHelper;
 import com.ferreusveritas.dynamictrees.items.Seed;
 import com.ferreusveritas.dynamictrees.trees.SpeciesRare;
 import com.ferreusveritas.dynamictrees.trees.TreeFamily;
-import com.ferreusveritas.dynamictrees.util.SafeChunkBounds;
 
 import dynamictreestc.DynamicTreesTC;
 import dynamictreestc.featuregen.FeatureGenVishroom;
@@ -16,7 +14,6 @@ import net.minecraft.block.BlockDirt;
 import net.minecraft.block.BlockGrass;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.EnumSkyBlock;
@@ -29,7 +26,7 @@ import thaumcraft.common.world.biomes.BiomeHandler;
 public class SpeciesOakMagic extends SpeciesRare {
 	
 	public SpeciesOakMagic(TreeFamily treeFamily) {
-		super(new ResourceLocation(DynamicTreesTC.MODID, treeFamily.getName().getResourcePath() + "magic"), treeFamily, ModBlocks.oakLeavesProperties);
+		super(new ResourceLocation(DynamicTreesTC.MODID, treeFamily.getName().getResourcePath() + "magic"), treeFamily, ModBlocks.leaves.get("oak"));
 		
 		setBasicGrowingParameters(0.3f, 14.0f, 4, 4, 1.25f);
 		
