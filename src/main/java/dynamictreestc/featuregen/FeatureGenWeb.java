@@ -38,7 +38,7 @@ public class FeatureGenWeb implements IPostGenFeature {
 	}
 	
 	@Override
-	public boolean postGeneration(World world, BlockPos rootPos, Biome biome, int radius, List<BlockPos> endPoints, SafeChunkBounds safeBounds, IBlockState initialDirtState) {
+	public boolean postGeneration(World world, BlockPos rootPos, Species species, Biome biome, int radius, List<BlockPos> endPoints, SafeChunkBounds safeBounds, IBlockState initialDirtState) {
 		if (!endPoints.isEmpty()) {
 			int qty = (int) (endPoints.size() * ((world.rand.nextFloat() * 0.5f) + 0.75f));
 			

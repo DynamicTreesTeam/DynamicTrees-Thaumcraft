@@ -3,6 +3,7 @@ package dynamictreestc.featuregen;
 import java.util.List;
 
 import com.ferreusveritas.dynamictrees.api.IPostGenFeature;
+import com.ferreusveritas.dynamictrees.trees.Species;
 import com.ferreusveritas.dynamictrees.util.SafeChunkBounds;
 
 import net.minecraft.block.state.IBlockState;
@@ -25,7 +26,7 @@ public class FeatureGenMobSpawner implements IPostGenFeature {
 	}
 	
 	@Override
-	public boolean postGeneration(World world, BlockPos rootPos, Biome biome, int radius, List<BlockPos> endPoints, SafeChunkBounds safeBounds, IBlockState initialDirtState) {
+	public boolean postGeneration(World world, BlockPos rootPos, Species species, Biome biome, int radius, List<BlockPos> endPoints, SafeChunkBounds safeBounds, IBlockState initialDirtState) {
 		BlockPos spawnerPos = rootPos.down(depth);
 		world.setBlockState(spawnerPos, Blocks.MOB_SPAWNER.getDefaultState());
 		TileEntityMobSpawner spawner = (TileEntityMobSpawner) world.getTileEntity(spawnerPos);

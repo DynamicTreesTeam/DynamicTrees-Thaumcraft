@@ -96,10 +96,10 @@ public class TreeGreatwood extends TreeFamily {
 			final Random rand = new Random();
 			
 			addGenFeature(new FeatureGenClearVolume(6));//Clear a spot for the thick tree trunk
-			addGenFeature(new FeatureGenFlareBottom(this));//Flare the bottom
-			addGenFeature(new FeatureGenMound(this, 5));//Establish mounds
+			addGenFeature(new FeatureGenFlareBottom());//Flare the bottom
+			addGenFeature(new FeatureGenMound(5));//Establish mounds
 			addGenFeature(new FeatureGenVishroom().setMaxAttempts(3).setChance(3));//Supplement Thaumcraft's vishroom generation
-			addGenFeature(new FeatureGenRoots(this, 13).setScaler(getRootScaler()));//Finally Generate Roots
+			addGenFeature(new FeatureGenRoots(13).setScaler(getRootScaler()));//Finally Generate Roots
 			
 			addGenFeature( // Add spiders to some greatwoods
 				new FeatureGenPredicate(
