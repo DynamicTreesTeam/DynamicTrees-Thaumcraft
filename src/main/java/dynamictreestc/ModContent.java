@@ -7,6 +7,7 @@ import com.ferreusveritas.dynamictrees.ModConstants;
 import com.ferreusveritas.dynamictrees.ModItems;
 import com.ferreusveritas.dynamictrees.ModRecipes;
 import com.ferreusveritas.dynamictrees.api.TreeRegistry;
+import com.ferreusveritas.dynamictrees.api.WorldGenRegistry.BiomeDataBasePopulatorRegistryEvent;
 import com.ferreusveritas.dynamictrees.api.client.ModelHelper;
 import com.ferreusveritas.dynamictrees.api.treedata.ILeavesProperties;
 import com.ferreusveritas.dynamictrees.blocks.LeavesPaging;
@@ -19,6 +20,7 @@ import dynamictreestc.blocks.BlockDynamicLeavesSilverwood;
 import dynamictreestc.trees.TreeGreatwood;
 import dynamictreestc.trees.TreeSilverwood;
 import dynamictreestc.trees.species.SpeciesOakMagic;
+import dynamictreestc.worldgen.BiomeDataBasePopulator;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.state.IBlockState;
@@ -52,6 +54,11 @@ public class ModContent {
 	
 	// trees added by this mod
 	public static ArrayList<TreeFamily> trees = new ArrayList<TreeFamily>();
+	
+	@SubscribeEvent
+	public static void registerDataBasePopulators(final BiomeDataBasePopulatorRegistryEvent event) {
+		event.register(new BiomeDataBasePopulator());
+	}
 	
 	@SubscribeEvent
 	public static void registerBlocks(final RegistryEvent.Register<Block> event) {

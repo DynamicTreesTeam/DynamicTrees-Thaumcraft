@@ -9,7 +9,6 @@ import com.ferreusveritas.dynamictrees.trees.Species;
 
 import dynamictreestc.DynamicTreesTC;
 import dynamictreestc.dropcreators.DropCreatorFruit;
-import dynamictreestc.worldgen.BiomeDataBasePopulator;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -68,8 +67,6 @@ public class CommonProxy {
 			if (access.getBiome(trunkPos) == BiomeHandler.MAGICAL_FOREST) return oakMagic;
 			return Species.NULLSPECIES;
 		});
-		
-		WorldGenRegistry.registerBiomeDataBasePopulator(new BiomeDataBasePopulator());
 	}
 	
 	public void postInit() {
