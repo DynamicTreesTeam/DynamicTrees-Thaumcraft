@@ -154,6 +154,11 @@ public class TreeGreatwood extends TreeFamily {
 			return false;
 		}
 		
+		@Override
+		public boolean isThick() {
+			return true;
+		}
+		
 	}
 	
 	

@@ -131,6 +131,11 @@ public class TreeSilverwood extends TreeFamily {
 			return false;
 		}
 		
+		@Override
+		public boolean isThick() {
+			return true;
+		}
+		
 	}
 	
 	
