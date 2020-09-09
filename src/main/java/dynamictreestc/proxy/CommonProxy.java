@@ -55,6 +55,7 @@ public class CommonProxy {
 			}, 0);
 			
 			ModConfig.CONFIG_WORLD.generateTrees = false; // Disable Thaumcraft's vegetation generation
+			ModConfig.CONFIG_WORLD.regenTrees = false; // Disable Thaumcraft's vegetation regeneration
 		}
 	}
 	
