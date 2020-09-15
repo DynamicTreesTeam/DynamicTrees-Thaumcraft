@@ -6,3 +6,8 @@ tile.dynamictreestc:leaves_silverwood.name=Dynamic Leaves
 
 tile.dynamictreestc:greatwoodbranch.name=Dynamic Greatwood Tree
 tile.dynamictreestc:silverwoodbranch.name=Dynamic Silverwood Tree
+
+species.dynamictreestc:oakmagic.name=Magic Oak
+species.dynamictreestc:silverwood.name=Silverwood
+species.dynamictreestc:greatwood.name=Greatwood
+
