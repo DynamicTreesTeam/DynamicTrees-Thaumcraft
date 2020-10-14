@@ -1,8 +1,12 @@
 item.dynamictreestc:greatwoodseed.name=宏伟之树种子
 item.dynamictreestc:silverwoodseed.name=银树种子
 
-tile.dynamictreestc:leaves0.name=有活力的树叶
-tile.dynamictreestc:leaves_silverwood.name=有活力的树叶
+tile.dynamictreestc:leaves0.name=动态树叶
+tile.dynamictreestc:leaves_silverwood.name=动态树叶
 
-tile.dynamictreestc:greatwoodbranch.name=有活力的宏伟之树
-tile.dynamictreestc:silverwoodbranch.name=有活力的银树
+tile.dynamictreestc:greatwoodbranch.name=动态宏伟之树
+tile.dynamictreestc:silverwoodbranch.name=动态银树
+
+species.dynamictreestc:oakmagic.name=魔法橡木
+species.dynamictreestc:silverwood.name=银木
+species.dynamictreestc:greatwood.name=宏伟之木
