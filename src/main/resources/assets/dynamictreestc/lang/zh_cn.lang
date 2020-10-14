@@ -7,6 +7,6 @@ tile.dynamictreestc:leaves_silverwood.name=动态树叶
 tile.dynamictreestc:greatwoodbranch.name=动态宏伟之树
 tile.dynamictreestc:silverwoodbranch.name=动态银树
 
-species.dynamictreestc:oakmagic.name=魔法橡木
-species.dynamictreestc:silverwood.name=银木
-species.dynamictreestc:greatwood.name=宏伟之木
+species.dynamictreestc:oakmagic.name=魔法橡树
+species.dynamictreestc:silverwood.name=银树
+species.dynamictreestc:greatwood.name=宏伟之树
